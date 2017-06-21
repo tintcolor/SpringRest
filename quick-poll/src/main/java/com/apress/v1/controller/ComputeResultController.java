@@ -1,4 +1,4 @@
-package com.apress.controller;
+package com.apress.v1.controller;
 
 import com.apress.dto.OptionCount;
 import com.apress.dto.VoteResult;
@@ -18,7 +18,8 @@ import java.util.Map;
 /**
  * Created by anthonyjones on 6/20/17.
  */
-@RestController
+@RestController("computeResultControllerv1")
+@RequestMapping(value = "/v1/")
 public class ComputeResultController {
 
     @Inject

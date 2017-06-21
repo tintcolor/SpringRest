@@ -1,4 +1,4 @@
-package com.apress.controller;
+package com.apress.v2.controller;
 
 import com.apress.domain.Vote;
 import com.apress.repository.VoteRepository;
@@ -13,7 +13,8 @@ import javax.inject.Inject;
 /**
  * Created by anthonyjones on 6/20/17.
  */
-@RestController
+@RestController("voteControllerv2")
+@RequestMapping(value = "/v2/")
 public class VoteController {
     @Inject
     private VoteRepository voteRepository;

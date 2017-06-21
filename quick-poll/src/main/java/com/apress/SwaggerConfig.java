@@ -19,19 +19,32 @@ public class SwaggerConfig {
     @Inject
     private SpringSwaggerConfig springSwaggerConfig;
 
-    @Bean
-    public SwaggerSpringMvcPlugin configureSwagger() {
-        SwaggerSpringMvcPlugin swaggerSpringMvcPlugin = new
-                SwaggerSpringMvcPlugin(this.springSwaggerConfig);
-
+    private ApiInfo getApiInfo() {
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("QuickPoll REST API")
                 .description("QuickPoll Api for creating and managing polls").termsOfServiceUrl("http://example.com/terms-of-service").contact("info@example.com")
-                .license("MIT License")
-                .licenseUrl("http://opensource.org/licenses/MIT")
-                .build();
-        swaggerSpringMvcPlugin.apiInfo(apiInfo)
-                .apiVersion("1.0");
+                .license("MIT License").licenseUrl("http://opensource.org/licenses/MIT").build();
+        return apiInfo;
+    }
+
+    @Bean
+    public SwaggerSpringMvcPlugin v1APIConfiguration() {
+        SwaggerSpringMvcPlugin swaggerSpringMvcPlugin = new
+                SwaggerSpringMvcPlugin(this.springSwaggerConfig);
+        swaggerSpringMvcPlugin
+                .apiInfo(getApiInfo()).apiVersion("1.0")
+                .includePatterns("/v1/*.*").swaggerGroup("v1");
+        swaggerSpringMvcPlugin.useDefaultResponseMessages(false);
+        return swaggerSpringMvcPlugin;
+    }
+
+    @Bean
+    public SwaggerSpringMvcPlugin v2APIConfiguration() {
+        SwaggerSpringMvcPlugin swaggerSpringMvcPlugin = new
+                SwaggerSpringMvcPlugin(this.springSwaggerConfig);
+        swaggerSpringMvcPlugin
+                .apiInfo(getApiInfo()).apiVersion("2.0")
+                .includePatterns("/v2/*.*").swaggerGroup("v2");
         swaggerSpringMvcPlugin.useDefaultResponseMessages(false);
         return swaggerSpringMvcPlugin;
     }

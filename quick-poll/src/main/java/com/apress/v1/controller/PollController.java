@@ -1,4 +1,4 @@
-package com.apress.controller;
+package com.apress.v1.controller;
 
 import com.apress.domain.Poll;
 import com.apress.dto.error.ErrorDetail;
@@ -23,7 +23,8 @@ import java.net.URI;
 /**
  * Created by anthonyjones on 6/19/17.
  */
-@RestController
+@RestController("pollControllerv1")
+@RequestMapping(value = "/v1/")
 @Api(value = "polls", description = "Poll API")//Swagger, saying it's being hosted at /polls
 public class PollController {
 
